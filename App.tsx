@@ -1,15 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import TakePicture from './components/TakePicture';
 import ShowPicture from './components/ShowPicture';
 import { S3 } from 'aws-sdk';
-import * as FileSystem from 'expo-file-system';
 
 export default function App() {
-  const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const cameraRef = useRef(null);
   const [imageSource, setImageSource] = useState();
 
   if (!permission) {
@@ -37,8 +34,8 @@ export default function App() {
   const onSubmit = async () => {
     if (imageSource != null) {
       const s3Bucket = new S3({
-        accessKeyId: 'AKIAXVX3XNUFCGHIAU6G',
-        secretAccessKey: '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'
+        accessKeyId: process.env.AWS_KEY,
+        secretAccessKey: process.env.AWS_SECRET
       });
 
       let picture = await fetch(imageSource.uri);

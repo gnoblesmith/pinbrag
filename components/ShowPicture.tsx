@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { TouchableOpacity, Image, StyleSheet, Text, View, Button } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
-import icon from './assets/favicon.png';
+import icon from '../assets/icon.png';
 
 export default function ShowPicture(props) {
   const { onTakeAnother, imageSource, onSubmit } = props;
